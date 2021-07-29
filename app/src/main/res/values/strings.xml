@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">DateTimePicker</string>
+    <string name="time_picker">时间选择</string>
+</resources>

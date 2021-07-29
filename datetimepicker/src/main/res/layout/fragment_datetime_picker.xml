@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="50dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/datetime_dialog_title"
+        android:textColor="#000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_time_show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/datetime_dialog_show"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/fl_datetimepicker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        app:justifyContent="space_around"
+        app:layout_constraintTop_toBottomOf="@+id/tv_time_show">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <com.gredicer.datetimepicker.ScrollPickerView
+                android:id="@+id/date_picker_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:scrollpicker_gravity="center"
+                app:scrollpicker_rows="3"
+                app:scrollpicker_spacing="20dp"
+                app:scrollpicker_textColor_center="#555555"
+                app:scrollpicker_textColor_outside="#fff"
+                app:scrollpicker_textFormat="0000"
+                app:scrollpicker_textRatio="1.4"
+                app:scrollpicker_textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="@string/year"
+                android:textColor="#000"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <com.gredicer.datetimepicker.ScrollPickerView
+                android:id="@+id/date_picker_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:scrollpicker_gravity="center"
+                app:scrollpicker_rows="3"
+                app:scrollpicker_spacing="20dp"
+                app:scrollpicker_textColor_center="#555555"
+                app:scrollpicker_textColor_outside="#fff"
+                app:scrollpicker_textFormat="00"
+                app:scrollpicker_textRatio="1.4"
+                app:scrollpicker_textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="@string/month"
+                android:textColor="#000"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <com.gredicer.datetimepicker.ScrollPickerView
+                android:id="@+id/date_picker_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:scrollpicker_gravity="center"
+                app:scrollpicker_rows="3"
+                app:scrollpicker_spacing="20dp"
+                app:scrollpicker_textColor_center="#555555"
+                app:scrollpicker_textColor_outside="#fff"
+                app:scrollpicker_textFormat="00"
+                app:scrollpicker_textRatio="1.4"
+                app:scrollpicker_textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="@string/day"
+                android:textColor="#000"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <com.gredicer.datetimepicker.ScrollPickerView
+                android:id="@+id/date_picker_hour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:scrollpicker_gravity="center"
+                app:scrollpicker_rows="3"
+                app:scrollpicker_spacing="20dp"
+                app:scrollpicker_textColor_center="#555555"
+                app:scrollpicker_textColor_outside="#fff"
+                app:scrollpicker_textFormat="00"
+                app:scrollpicker_textRatio="1.4"
+                app:scrollpicker_textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="@string/hour"
+                android:textColor="#000"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <com.gredicer.datetimepicker.ScrollPickerView
+                android:id="@+id/date_picker_minute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:scrollpicker_gravity="center"
+                app:scrollpicker_rows="3"
+                app:scrollpicker_spacing="20dp"
+                app:scrollpicker_textColor_center="#555555"
+                app:scrollpicker_textColor_outside="#fff"
+                app:scrollpicker_textFormat="00"
+                app:scrollpicker_textRatio="1.4"
+                app:scrollpicker_textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="@string/minute"
+                android:textColor="#000"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+    </com.google.android.flexbox.FlexboxLayout>
+
+    <TextView
+        android:id="@+id/btn_back_now"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/shape_button_corners"
+        android:gravity="center"
+        android:text="@string/back_now"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/btn_enter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fl_datetimepicker" />
+
+    <TextView
+        android:id="@+id/btn_enter"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:background="@drawable/shape_button_corners"
+        android:gravity="center"
+        android:text="@string/enter"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_back_now"
+        app:layout_constraintTop_toTopOf="@id/btn_back_now" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
