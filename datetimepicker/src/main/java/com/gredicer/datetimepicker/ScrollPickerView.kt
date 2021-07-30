@@ -616,9 +616,9 @@ class ScrollPickerView : View, AnimatorUpdateListener {
     private fun getRealPosition(position: Int): Int {
         var position = position
         if (mLoopEnable && mAdapter != null && mAdapter!!.count > 0) {
-            position = position % mAdapter!!.count
+            position %= mAdapter!!.count
             if (position < 0) {
-                position = position + mAdapter!!.count
+                position += mAdapter!!.count
             }
         }
         return position
@@ -655,16 +655,32 @@ class ScrollPickerView : View, AnimatorUpdateListener {
         mAdapter = adapter
         super.invalidate()
     }
-    /**
-     * 获取当前选中项
-     */// 如果在onMeasure之前设置选中项，mItemHeight为0，无法得到正确偏移量，因此这里不能直接计算mTotalOffset
+
     /**
      * 设置当前选中项
      */
-    var selectedPosition: Int = 0
-        get() = if (isMoveAction || (mAdapter == null) || mDecelerateAnimator!!.isStarted) {
+    fun setSelectedPosition(position: Int) {
+        if (mAdapter == null) return
+        if (position < 0 || position >= mAdapter!!.count) {
+            throw ArrayIndexOutOfBoundsException()
+        }
+        if (mDecelerateAnimator!!.isStarted) {
+            mDecelerateAnimator!!.cancel()
+        }
+        // 如果在onMeasure之前设置选中项，mItemHeight为0，无法得到正确偏移量，因此这里不能直接计算mTotalOffset
+        mSpecifyPosition = position
+        super.invalidate()
+    }
+
+    /**
+     * 获取当前选中项
+     */
+    fun getSelectedPosition(): Int {
+        return if (isMoveAction || mAdapter == null || mDecelerateAnimator!!.isStarted) {
             -1
         } else mMiddleItemPostion
+    }
+
 
     /**
      * 设置文本对齐方式，计算文本绘制起始点的X坐标

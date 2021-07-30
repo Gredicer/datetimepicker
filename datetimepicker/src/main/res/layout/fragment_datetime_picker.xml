@@ -23,6 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:gravity="center"
         android:text="@string/datetime_dialog_show"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,9 +38,11 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_time_show">
 
         <LinearLayout
+            android:id="@+id/year_show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:gravity="center"
+            android:visibility="gone">
 
             <com.gredicer.datetimepicker.ScrollPickerView
                 android:id="@+id/date_picker_year"
@@ -65,9 +68,11 @@
 
 
         <LinearLayout
+            android:id="@+id/month_show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:gravity="center"
+            android:visibility="gone">
 
             <com.gredicer.datetimepicker.ScrollPickerView
                 android:id="@+id/date_picker_month"
@@ -92,9 +97,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/day_show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:gravity="center"
+            android:visibility="gone">
 
             <com.gredicer.datetimepicker.ScrollPickerView
                 android:id="@+id/date_picker_day"
@@ -119,9 +126,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/hour_show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:gravity="center"
+            android:visibility="gone">
 
             <com.gredicer.datetimepicker.ScrollPickerView
                 android:id="@+id/date_picker_hour"
@@ -146,9 +155,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/minute_show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:gravity="center"
+            android:visibility="gone">
 
             <com.gredicer.datetimepicker.ScrollPickerView
                 android:id="@+id/date_picker_minute"

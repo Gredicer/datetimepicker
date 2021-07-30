@@ -44,7 +44,7 @@ class DatePickerAdapter @JvmOverloads constructor(
         return indexOf(value)
     }
 
-    private fun indexOf(value: Int): Int {
+    fun indexOf(value: Int): Int {
         return if (value < minValue || value > maxValue) {
             -1
         } else value - minValue
