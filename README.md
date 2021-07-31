@@ -12,7 +12,7 @@ Step 1. Add it in your root build.gradle at the end of repositories:
 allprojects {
     repositories {
     ...
-    maven { url 'https://jitpack.io' }
+        maven { url 'https://jitpack.io' }
     }
 }
 ```
@@ -30,17 +30,20 @@ dependencies {
 
 ```
 val dialog = DateTimePickerFragment.newInstance().mode(0).default("2010-10-10 11:11:11")
+
 btn.setOnClickListener {
-  dialog.show(this.supportFragmentManager, null)
+    dialog.show(this.supportFragmentManager, null)
 }
+
 dialog.listener = object : DateTimePickerFragment.OnClickListener {
-	override fun onClickListener(selectTime: String) {
-		Toast.makeText(applicationContext, selectTime, Toast.LENGTH_SHORT).show()
-	}
+    override fun onClickListener(selectTime: String) {
+        Toast.makeText(applicationContext, selectTime, Toast.LENGTH_SHORT).show()
+    }
 }
 ```
 
-其中 `mode`的值对应为：
+`.default` 用来设置初始值，如果不设置默认为当前时间
+ `mode`的值对应为：
 
 ```
 0：默认，年月日时分
@@ -51,4 +54,4 @@ dialog.listener = object : DateTimePickerFragment.OnClickListener {
 5：设定初始时间
 ```
 
-`.default` 用来设置初始值，如果不设置默认为当前时间
+
