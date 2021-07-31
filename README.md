@@ -20,7 +20,7 @@ allprojects {
 Step 2. Add the dependency
 ```kotlin
 dependencies {
-    implementation 'com.github.Gredicer:datetimepicker:Tag'
+    implementation 'com.github.Gredicer:datetimepicker:V1.0.0'
 }
 ```
 
