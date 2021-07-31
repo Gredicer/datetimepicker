@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,11 +8,65 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+
     <Button
         android:id="@+id/btn1"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:text="@string/time_picker"
+        android:layout_width="200dp"
+        android:layout_height="55dp"
+        android:text="默认选择"
+        android:textColor="@color/white"
+        android:background="@drawable/shape_button_corners0"
         tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btn2"
+        android:layout_width="200dp"
+        android:layout_height="55dp"
+        android:text="年选择"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape_button_corners1"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btn3"
+        android:layout_width="200dp"
+        android:layout_height="55dp"
+        android:text="年月选择"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape_button_corners2"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btn4"
+        android:layout_width="200dp"
+        android:layout_height="55dp"
+        android:text="年月日选择"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape_button_corners3"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btn5"
+        android:layout_width="200dp"
+        android:layout_height="55dp"
+        android:text="时间选择"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape_button_corners4"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btn6"
+        android:layout_width="200dp"
+        android:layout_height="55dp"
+        android:text="设定初始时间"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape_button_corners5"
+        tools:ignore="HardcodedText" />
+
 
 </LinearLayout>

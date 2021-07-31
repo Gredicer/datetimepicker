@@ -21,12 +21,17 @@ import java.util.*
 class DateTimePickerFragment : DialogFragment(), ScrollPickerView.OnItemSelectedListener {
     private var window: Window? = null
 
+    // 当前模式 0-年月日时分 1-年 2-年月 3-年月日 4-时分
+    private var mMode: Int = 0
 
     // 退出状态
     private var exitStatus: Boolean = false
 
     // 是否设置初始值
     private var hasSetDefault: Boolean = false
+
+    // 初始时间
+    private var mDefaultTime = "2000-01-01 00:00:00"
 
 
     private var mYearAdapter = DatePickerAdapter(1900, 2200, DecimalFormat("0000"))
@@ -42,13 +47,6 @@ class DateTimePickerFragment : DialogFragment(), ScrollPickerView.OnItemSelected
 
 
     companion object {
-        const val DateTimePickerTAG = "DateTimePickerFragment"
-        private var mDefaultTime = "2000-01-01 00:00:00"
-        var hasYear: Boolean = false
-        var hasMonth: Boolean = false
-        var hasDay: Boolean = false
-        var hasHour: Boolean = false
-        var hasMinute: Boolean = false
         fun newInstance(): DateTimePickerFragment {
             return DateTimePickerFragment()
         }
@@ -77,8 +75,7 @@ class DateTimePickerFragment : DialogFragment(), ScrollPickerView.OnItemSelected
             dialog!!.setCancelable(true)
             // dialog弹出后会点击屏幕，dialog不消失；点击物理返回键dialog消失
             dialog!!.setCanceledOnTouchOutside(true)
-            // 初始化退出状态为现在可以退出，不在退出状态
-            exitStatus = false
+
             enterAnimation()
         }
     }
@@ -100,45 +97,40 @@ class DateTimePickerFragment : DialogFragment(), ScrollPickerView.OnItemSelected
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // 初始化退出状态为现在可以退出，不在退出状态
+        exitStatus = false
 
-        var showCount = 0
-        if (hasYear) {
-            year_show.visibility = View.VISIBLE
-            date_picker_year.setAdapter(mYearAdapter)
-            date_picker_year.setOnItemSelectedListener(this)
-            setSelectValue(0, mDefaultTime.substring(0, 4).toInt())
-            showCount++
-        }
-        if (hasMonth) {
-            month_show.visibility = View.VISIBLE
-            date_picker_month.setAdapter(mMonthAdapter)
-            date_picker_month.setOnItemSelectedListener(this)
-            setSelectValue(1, mDefaultTime.substring(5, 7).toInt())
-            showCount++
-        }
-        if (hasDay) {
-            day_show.visibility = View.VISIBLE
-            date_picker_day.setAdapter(mDayAdapter)
-            date_picker_day.setOnItemSelectedListener(this)
-            setSelectValue(2, mDefaultTime.substring(8, 10).toInt())
-            showCount++
-        }
-        if (hasHour) {
-            hour_show.visibility = View.VISIBLE
-            date_picker_hour.setAdapter(mHourAdapter)
-            date_picker_hour.setOnItemSelectedListener(this)
-            setSelectValue(3, mDefaultTime.substring(11, 13).toInt())
-            showCount++
-        }
-        if (hasMinute) {
-            minute_show.visibility = View.VISIBLE
-            date_picker_minute.setAdapter(mMinuteAdapter)
-            date_picker_minute.setOnItemSelectedListener(this)
-            setSelectValue(4, mDefaultTime.substring(14, 16).toInt())
-            showCount++
+        when (mMode) {
+            0 -> {
+                initYear()
+                initMonth()
+                initDay()
+                initHour()
+                initMinute()
+            }
+            1 -> {
+                initYear()
+            }
+            2 -> {
+                initYear()
+                initMonth()
+                resetUI(2)
+            }
+            3 -> {
+                initYear()
+                initMonth()
+                initDay()
+                resetUI(3)
+            }
+            4 -> {
+                initHour()
+                initMinute()
+                resetUI(2)
+            }
         }
 
-        resetUI(showCount)
+
+
         if (!hasSetDefault) resetTime()
 
         btn_back_now.setOnClickListener { resetTime() }
@@ -187,42 +179,11 @@ class DateTimePickerFragment : DialogFragment(), ScrollPickerView.OnItemSelected
     /**
      * 增加年的显示
      * */
-    fun year(): DateTimePickerFragment {
-        hasYear = true
+    fun mode(mode: Int): DateTimePickerFragment {
+        mMode = mode
         return this
     }
 
-    /**
-     * 增加月的显示
-     * */
-    fun month(): DateTimePickerFragment {
-        hasMonth = true
-        return this
-    }
-
-    /**
-     * 增加天的显示
-     * */
-    fun day(): DateTimePickerFragment {
-        hasDay = true
-        return this
-    }
-
-    /**
-     * 增加小时的显示
-     * */
-    fun hour(): DateTimePickerFragment {
-        hasHour = true
-        return this
-    }
-
-    /**
-     * 增加分钟的显示
-     * */
-    fun minute(): DateTimePickerFragment {
-        hasMinute = true
-        return this
-    }
 
     /**
      * 设置初始值
@@ -231,6 +192,56 @@ class DateTimePickerFragment : DialogFragment(), ScrollPickerView.OnItemSelected
         mDefaultTime = defaultTime
         hasSetDefault = true
         return this
+    }
+
+    /**
+     * 初始化年
+     * */
+    private fun initYear() {
+        year_show.visibility = View.VISIBLE
+        date_picker_year.setAdapter(mYearAdapter)
+        date_picker_year.setOnItemSelectedListener(this)
+        setSelectValue(0, mDefaultTime.substring(0, 4).toInt())
+    }
+
+    /**
+     * 初始化月
+     * */
+    private fun initMonth() {
+        month_show.visibility = View.VISIBLE
+        date_picker_month.setAdapter(mMonthAdapter)
+        date_picker_month.setOnItemSelectedListener(this)
+        setSelectValue(1, mDefaultTime.substring(5, 7).toInt())
+    }
+
+    /**
+     * 初始化日
+     * */
+    private fun initDay() {
+        day_show.visibility = View.VISIBLE
+        date_picker_day.setAdapter(mDayAdapter)
+        date_picker_day.setOnItemSelectedListener(this)
+        setSelectValue(2, mDefaultTime.substring(8, 10).toInt())
+    }
+
+    /**
+     * 初始化时
+     * */
+    private fun initHour() {
+        hour_show.visibility = View.VISIBLE
+        date_picker_hour.setAdapter(mHourAdapter)
+        date_picker_hour.setOnItemSelectedListener(this)
+        setSelectValue(3, mDefaultTime.substring(11, 13).toInt())
+    }
+
+    /**
+     * 初始化分
+     * */
+    private fun initMinute() {
+        minute_show.visibility = View.VISIBLE
+        date_picker_minute.setAdapter(mMinuteAdapter)
+        date_picker_minute.setOnItemSelectedListener(this)
+        setSelectValue(4, mDefaultTime.substring(14, 16).toInt())
     }
 
     /**
@@ -268,9 +279,6 @@ class DateTimePickerFragment : DialogFragment(), ScrollPickerView.OnItemSelected
             3 -> {
                 fl_datetimepicker.setPadding(100, 0, 100, 0)
             }
-            4 -> {
-                fl_datetimepicker.setPadding(50, 0, 50, 0)
-            }
         }
     }
 
@@ -279,12 +287,29 @@ class DateTimePickerFragment : DialogFragment(), ScrollPickerView.OnItemSelected
      * */
     private fun showTime() {
         var showText = ""
-        if (hasYear) showText += "$mSelectedYear 年"
-        if (hasMonth) showText += " ${formatTime(mSelectedMonth)} 月"
-        if (hasDay) showText += " ${formatTime(mSelectedDay)} 日"
-        if (hasYear || hasMonth || hasDay) showText += "   "
-        if (hasHour) showText += "${formatTime(mSelectedHour)} :"
-        if (hasMinute) showText += " ${formatTime(mSelectedMinute)}"
+        when (mMode) {
+            0 -> {
+                showText += "$mSelectedYear 年"
+                showText += " ${formatTime(mSelectedMonth)} 月"
+                showText += " ${formatTime(mSelectedDay)} 日   "
+                showText += "${formatTime(mSelectedHour)} :"
+                showText += " ${formatTime(mSelectedMinute)}"
+            }
+            1 -> {
+                showText = "$mSelectedYear 年"
+            }
+            2 -> {
+                showText = "$mSelectedYear 年 ${formatTime(mSelectedMonth)} 月"
+            }
+            3 -> {
+                showText += "$mSelectedYear 年"
+                showText += " ${formatTime(mSelectedMonth)} 月"
+                showText += " ${formatTime(mSelectedDay)} 日"
+            }
+            4 -> {
+                showText = "${formatTime(mSelectedHour)}:${formatTime(mSelectedMinute)}"
+            }
+        }
         tv_time_show.text = showText
     }
 
@@ -293,11 +318,27 @@ class DateTimePickerFragment : DialogFragment(), ScrollPickerView.OnItemSelected
      * */
     private fun returnTime(): String {
         var text = ""
-        if (hasYear) text += "${formatTime(mSelectedYear)}-"
-        if (hasMonth) text += "${formatTime(mSelectedMonth)}-"
-        if (hasDay) text += "${formatTime(mSelectedDay)}"
-        if (hasHour) text += " ${formatTime(mSelectedHour)}:"
-        if (hasMinute) text += "${formatTime(mSelectedMinute)}:00"
+        when (mMode) {
+            0 -> {
+                text += "$mSelectedYear-"
+                text += "${formatTime(mSelectedMonth)}-"
+                text += "${formatTime(mSelectedDay)} "
+                text += "${formatTime(mSelectedHour)}:"
+                text += formatTime(mSelectedMinute)
+            }
+            1 -> {
+                text = "$mSelectedYear"
+            }
+            2 -> {
+                text = "$mSelectedYear-${formatTime(mSelectedMonth)}"
+            }
+            3 -> {
+                text = "$mSelectedYear-${formatTime(mSelectedMonth)}-${formatTime(mSelectedDay)}"
+            }
+            4 -> {
+                text = "${formatTime(mSelectedHour)}:${formatTime(mSelectedMinute)}"
+            }
+        }
         return text
     }
 
